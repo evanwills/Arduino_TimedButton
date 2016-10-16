@@ -1,0 +1,11 @@
+ITimedButton KEYWORD1
+DumbButton KEYWORD1
+TimedButton KEYWORD1
+MultiPressButton KEYWORD1
+FixedTimeMultiPressButton KEYWORD1
+MultiModeButton KEYWORD1
+
+readButton KEYWORD2
+pressed KEYWORD2
+multiPress KEYWORD2
+makePinModePullup KEYWORD2
