@@ -1,12 +1,23 @@
+#ifndef TimedButton_h
+#define TimedButton_h
+
+
+#include <Arduino.h>
+#include <stdlib.h>
+
+
 /**
- * ITimedButton is useful for when you want to do time
- * based things with a button
+ * TimedButton.h - useful for when you want to do time based things
+ * with a button
  * e.g. a short click of the button (say, less than 1 second) is used
  *		for modifying settings but a long click is used for resetting
  *		to defaults
  *	or	multiple presses within a given time.
+ *
+ * Created by Evan Wills 2016-10-16
+ * Released under GPL2 Licence
  */
-public class ITimedButton {
+class ITimedButton {
 
 	public:
 		/**
@@ -21,19 +32,13 @@ public class ITimedButton {
 		 * milliseconds the buttons was pressed for.
 		 */
 		virtual int pressed();
-
-	private:
-		/*
-		 * btnPin the Arduino Mega pin number used by the button
-		 */
-		byte btnPin = 0;
-}
+};
 
 
-public class DumbButton : ITimedButton {
+class DumbButton : ITimedButton {
 
 	public:
-		CleverButton( byte pin );
+		DumbButton( byte pin );
 		/**
 		 * If button is pressed, starts counting the number of
 		 * milliseconds since start and returns true. If not,
@@ -48,13 +53,20 @@ public class DumbButton : ITimedButton {
 		int pressed();
 
 		void makePinModePullup();
-}
+
+	protected:
+		/*
+		 * btnPin the Arduino Mega pin number used by the button
+		 */
+		byte btnPin = 0;
+};
 
 
-public class TimedButton : DumbButton {
+class TimedButton : DumbButton {
 
 	public:
-		CleverButton(byte pin);
+
+//		TimedButton(byte pin); // inherrited from DumbButton
 		/**
 		 * reads the button's state then returns the number of
 		 * milliseconds the buttons was pressed for.
@@ -70,11 +82,11 @@ public class TimedButton : DumbButton {
 		unsigned long start = 0;
 		unsigned long pressDuration = 0;
 		bool inUse = false;
-}
+};
 
 
 
-public class MultiPressButton : DumbButton {
+class MultiPressButton : DumbButton {
 
 	public:
 		MultiPressButton( byte pin , int maxNoPressInterval = 500 );
@@ -99,11 +111,11 @@ public class MultiPressButton : DumbButton {
 		 * released that indicates no more pressing has finished.
 		 */
 		int maxNoPress = 500;
-}
+};
 
 
 
-public class FixedTimeMultiPressButton : DumbButton {
+class FixedTimeMultiPressButton : DumbButton {
 
 	public:
 		FixedTimeMultiPressButton( byte pin , int pressIntervalTime = 1000 );
@@ -129,17 +141,20 @@ public class FixedTimeMultiPressButton : DumbButton {
 		 * released that indicates no more pressing has finished.
 		 */
 		int TimeLimit = 1000;
-}
+};
 
 
 
-public class MultiModeButton : TimedButton {
+// MultiModeButton alows for both long press and multi-press button
+// presses to be used on a single button
+class MultiModeButton : TimedButton {
 
 	public:
 		MultiModeButton( byte pin , int maxNoPressInterval = 500 );
 		/**
-		 * reads the button's state then returns the number of
-		 * times the buttons was pressed.
+		 * reads the button's state then returns how long the button
+		 * was pressed for (or -1 if the button is currently being
+		 * pressed)
 		 */
 		int pressed();
 
@@ -171,4 +186,6 @@ public class MultiModeButton : TimedButton {
 		 * released that indicates no more pressing has finished.
 		 */
 		int maxNoPress = 500;
-}
+};
+
+#endif
