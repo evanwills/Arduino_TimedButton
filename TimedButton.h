@@ -1,3 +1,16 @@
+/**
+ * TimedButton.h - useful for when you want to do time based things
+ * with a button
+ * e.g. a short click of the button (say, less than 1 second) is used
+ *		for modifying settings but a long click is used for resetting
+ *		to defaults
+ *	or	multiple presses within a given time. Single click changes interface to modify setting for current mode. Double click changes modes. Tripple click
+ *
+ * Created by Evan Wills 2016-10-16
+ * Released under GPL2 Licence
+ */
+
+
 #ifndef TimedButton_h
 #define TimedButton_h
 
@@ -6,17 +19,7 @@
 #include <stdlib.h>
 
 
-/**
- * TimedButton.h - useful for when you want to do time based things
- * with a button
- * e.g. a short click of the button (say, less than 1 second) is used
- *		for modifying settings but a long click is used for resetting
- *		to defaults
- *	or	multiple presses within a given time.
- *
- * Created by Evan Wills 2016-10-16
- * Released under GPL2 Licence
- */
+
 class ITimedButton {
 
 	public:
@@ -35,7 +38,7 @@ class ITimedButton {
 };
 
 
-class DumbButton : ITimedButton {
+class DumbButton : public ITimedButton {
 
 	public:
 		DumbButton( byte pin );
@@ -62,7 +65,7 @@ class DumbButton : ITimedButton {
 };
 
 
-class TimedButton : DumbButton {
+class TimedButton : public DumbButton {
 
 	public:
 
@@ -86,7 +89,7 @@ class TimedButton : DumbButton {
 
 
 
-class MultiPressButton : DumbButton {
+class MultiPressButton : public DumbButton {
 
 	public:
 		MultiPressButton( byte pin , int maxNoPressInterval = 500 );
@@ -115,7 +118,7 @@ class MultiPressButton : DumbButton {
 
 
 
-class FixedTimeMultiPressButton : DumbButton {
+class FixedTimeMultiPressButton : public DumbButton {
 
 	public:
 		FixedTimeMultiPressButton( byte pin , int pressIntervalTime = 1000 );
@@ -147,7 +150,7 @@ class FixedTimeMultiPressButton : DumbButton {
 
 // MultiModeButton alows for both long press and multi-press button
 // presses to be used on a single button
-class MultiModeButton : TimedButton {
+class MultiModeButton : public TimedButton {
 
 	public:
 		MultiModeButton( byte pin , int maxNoPressInterval = 500 );
