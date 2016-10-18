@@ -8,7 +8,7 @@ DumbButton::DumbButton(byte pin) {
 
 
 bool DumbButton::readButton() {
-	if (digitalRead(incrementBtn) == HIGH) {
+	if (digitalRead(btnPin) == HIGH) {
 		return true;
 	} else {
 		return false;
