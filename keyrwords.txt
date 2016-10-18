@@ -2,6 +2,7 @@ ITimedButton KEYWORD1
 DumbButton KEYWORD1
 TimedButton KEYWORD1
 MultiPressButton KEYWORD1
+ToggleButton KEYWORD1
 FixedTimeMultiPressButton KEYWORD1
 MultiModeButton KEYWORD1
 

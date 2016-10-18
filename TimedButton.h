@@ -19,6 +19,8 @@
 #include <stdlib.h>
 
 
+// ========================================================
+// START: ITimedButton interface
 
 class ITimedButton {
 
@@ -34,8 +36,13 @@ class ITimedButton {
 		 * reads the button's state then returns the number of
 		 * milliseconds the buttons was pressed for.
 		 */
-		virtual int pressed();
+		virtual unsigned int pressed();
 };
+
+
+//  END:  ITimedButton interface
+// ========================================================
+// START: (basic) DumbButton class
 
 
 class DumbButton : public ITimedButton {
@@ -53,7 +60,7 @@ class DumbButton : public ITimedButton {
 		 * reads the button's state then returns zero if the button
 		 * is not pressed and one if it is.
 		 */
-		int pressed();
+		unsigned int pressed();
 
 		void makePinModePullup();
 
@@ -65,6 +72,11 @@ class DumbButton : public ITimedButton {
 };
 
 
+//  END:  (basic DumbButton class
+// ========================================================
+// START: TimedButton class
+
+
 class TimedButton : public DumbButton {
 
 	public:
@@ -74,7 +86,7 @@ class TimedButton : public DumbButton {
 		 * reads the button's state then returns the number of
 		 * milliseconds the buttons was pressed for.
 		 */
-		int pressed();
+		unsigned int pressed();
 
 	private:
 
@@ -88,6 +100,10 @@ class TimedButton : public DumbButton {
 };
 
 
+//  END:  TimedButton class
+// ========================================================
+// START: MultiPressButton class
+
 
 class MultiPressButton : public DumbButton {
 
@@ -97,7 +113,7 @@ class MultiPressButton : public DumbButton {
 		 * reads the button's state then returns the number of
 		 * times the buttons was pressed.
 		 */
-		int presed();
+		unsigned int pressed();
 
 	private:
 
@@ -117,6 +133,43 @@ class MultiPressButton : public DumbButton {
 };
 
 
+//  END:  MultiPressButton class
+// ========================================================
+// START: ToggleButton class
+
+// ToggleButton can be used to manage which index of an Array should
+// be used at any given time
+
+class ToggleButton : public DumbButton {
+
+	public:
+		ToggleButton( byte pin , byte limit = 1 );
+		/**
+		 * reads the button's state then returns the number of
+		 * times the buttons was pressed.
+		 */
+		unsigned int pressed();
+
+	private:
+
+		/**
+		 * start the time in milliseconds (from when the Arduino was
+		 * turned on) the button was pressed.
+		 */
+		bool inUse = false;
+		byte presses = 0;
+		/**
+		 * the maximum number of milliseconds after the button was
+		 * released that indicates no more pressing has finished.
+		 */
+		byte max = 1;
+};
+
+
+//  END:  toggleButton class
+// ========================================================
+// START: FixedTimeMultiPressButton class
+
 
 class FixedTimeMultiPressButton : public DumbButton {
 
@@ -126,7 +179,7 @@ class FixedTimeMultiPressButton : public DumbButton {
 		 * reads the button's state then returns the number of
 		 * times the buttons was pressed.
 		 */
-		int presed();
+		unsigned int pressed();
 
 	private:
 
@@ -147,6 +200,10 @@ class FixedTimeMultiPressButton : public DumbButton {
 };
 
 
+//  END:  FixedTimeMultiPressButton class
+// ========================================================
+// START: MultiModeButton class
+
 
 // MultiModeButton alows for both long press and multi-press button
 // presses to be used on a single button
@@ -159,7 +216,7 @@ class MultiModeButton : public TimedButton {
 		 * was pressed for (or -1 if the button is currently being
 		 * pressed)
 		 */
-		int pressed();
+		unsigned int pressed();
 
 		/**
 		 * reads the button's state then returns the number of

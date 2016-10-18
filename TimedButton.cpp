@@ -1,6 +1,11 @@
 #include TimedButton.h
 
 
+
+//  END:  (basic) DumbButton class
+// ========================================================
+// START: (basic) DumbButton class
+
 DumbButton::DumbButton(byte pin) {
 	btnPin = pin;
 	pinMode(btnPin, INPUT);
@@ -15,7 +20,7 @@ bool DumbButton::readButton() {
 	}
 }
 
-int DumbButton::pressed() {
+unsigned int DumbButton::pressed() {
 	if ( readButton() == true ) {
 		return 1;
 	} else {
@@ -34,6 +39,11 @@ void DumbButton::makePinModePullup() {
 }
 
 
+//  END:  (basic) DumbButton class
+// ========================================================
+// START: TimedButton class
+
+
 /**
  * How many seconds has the button been pressed for
  * If it's currently being pressed then it returns -1 to let caller
@@ -41,8 +51,12 @@ void DumbButton::makePinModePullup() {
  * If it's not being pressed, then it returns zero.
  * If the button has just been released, it returns the number of
  * milliseconds the button was pressed for.
+ *
+ * NOTE: It is assumed that the button will be pressed for less than
+ *		 65 seconds. (Otherwise, You'll probabaly have to think of
+ *		 another way of using this class.)
  */
-int TimedButton::pressed() {
+unsigned int TimedButton::pressed() {
 //	bool pressed = readButtion();
 
 	if( readButtion() == true ) {
@@ -69,11 +83,14 @@ int TimedButton::pressed() {
 		}
 		// button is no longer being pressed
 		inUse = false;
-		return (int) pressDuration;
+		return (unsigned int) pressDuration;
 	}
 }
 
 
+//  END:  TimedButton class
+// ========================================================
+// START: MultiPressButton class
 
 
 MultiPressButton::MultiPressButton( byte pin , int maxNoPress ) {
@@ -82,7 +99,7 @@ MultiPressButton::MultiPressButton( byte pin , int maxNoPress ) {
 	noPress = maxNoPress;
 }
 
-int MultiPressButton::pressed() {
+unsigned int MultiPressButton::pressed() {
 	if( readButtion() == true ) {
 		if ( inUse == false ) {
 			// the button has just been pressed
@@ -142,6 +159,44 @@ int MultiPressButton::pressed() {
 }
 
 
+//  END:  MultiPressButton class
+// ========================================================
+// START: ToggleButton class
+
+
+ToggleButton::ToggleButton( byte pin , byte limit ) {
+	btnPin = pin;
+	pinMode(btnPin, INPUT);
+	max = limit;
+}
+
+unsigned int ToggleButton::pressed() {
+	if( readButtion() == true ) {
+		if ( inUse == false ) {
+			// because this may be called many times during a single
+			// press we only want to increment once per presss so
+			// this is done within this IF statement
+
+			// add another press to the record
+			presses = presses + 1;
+
+			// check how many times the button has been pressed since
+			// last reset and reset if necessary
+			if ( presses > max ) {
+				presses = 0;
+			}
+			inUse = true;
+		}
+	} else {
+		inUse = false;
+	}
+	return (unsigned int) presses;
+}
+
+
+//  END:  MultiPressButton class
+// ========================================================
+// START: FixedTimeMultiPressButton class
 
 
 FixedTimeMultiPressButton::FixedTimeMultiPressButton( byte pin , int pressIntervalTime ) {
@@ -150,7 +205,7 @@ FixedTimeMultiPressButton::FixedTimeMultiPressButton( byte pin , int pressInterv
 	pressInterval = pressIntervalTime;
 }
 
-int FixedTimeMultiPressButton::pressed() {
+unsigned int FixedTimeMultiPressButton::pressed() {
 	int output = 0;
 	// how long has it been since we started
 	int duration;
@@ -208,7 +263,9 @@ int FixedTimeMultiPressButton::pressed() {
 }
 
 
-
+//  END:  FixedTimeMultiPressButton class
+// ========================================================
+// START: MultiModeButton class
 
 
 MultiModeButton::MultiModeButton( byte pin , int pressIntervalTime ) {
@@ -217,7 +274,7 @@ MultiModeButton::MultiModeButton( byte pin , int pressIntervalTime ) {
 	noPress = maxNoPress;
 }
 
-// int MultiModeButton::pressed() inherrited from TimedButton
+// unsigned int MultiModeButton::pressed() inherrited from TimedButton
 
 int MultiModeButton::multiPress() {
 	if( readButtion() == true ) {
