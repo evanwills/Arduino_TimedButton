@@ -62,6 +62,12 @@ class DumbButton { // : public ITimedButton {
 		 */
 		unsigned int pressed();
 
+		/**
+		 * sometimes it's necessary to make the input mode PULLUP.
+		 *
+		 * This is primarily for the rotaryEncoder class but may be
+		 * useful elsewhere
+		 */
 		void makePinModePullup();
 
 	protected:
