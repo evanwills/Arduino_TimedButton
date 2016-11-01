@@ -10,7 +10,7 @@ SimpleButton::SimpleButton(byte pin) {
 	pinMode(btnPin, INPUT);
 }
 
-bool SimpleButton::pressed() {
+bool SimpleButton::isPressed() {
 	if (digitalRead(btnPin) == HIGH) {
 		return false;
 	} else {
@@ -18,8 +18,8 @@ bool SimpleButton::pressed() {
 	}
 }
 
-unsigned int SimpleButton::readButton() {
-	if ( pressed() == true ) {
+int SimpleButton::getState() {
+	if ( isPressed() == true ) {
 		return 1;
 	} else {
 		return 0;
