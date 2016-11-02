@@ -2,7 +2,7 @@
 
 
 MultiPressButton::MultiPressButton( byte pin ) : SimpleButton (pin) {
-	// don't do anything here
+	// just do SimpleButton constructor
 }
 MultiPressButton::MultiPressButton( byte pin , int maxNoPressInterval )  : SimpleButton (pin) {
 	_maxNoPress = maxNoPressInterval;
@@ -24,7 +24,7 @@ int MultiPressButton::getState() {
 			// this is done within this IF statement
 
 			// add another press to the record
-			_pressState += 1;
+			_pressCount += 1;
 			_inUse = true;
 		}
 
@@ -50,11 +50,11 @@ int MultiPressButton::getState() {
 				// the moment
 
 				// send the number of presses to the caller
-				output = _pressState;
+				output = _pressCount;
 				// stop counting
 				_counting = false;
 				// reset presses
-				_pressState = 0;
+				_pressCount = 0;
 				_notPressed = 0;
 			} else {
 				// let the caller know we're still counting presses

@@ -40,7 +40,7 @@ class FixedTimeMultiPressButton : public SimpleButton {
 		int _pressInterval = 0;
 		bool _inUse = false;
 		bool _counting = false;
-		byte _pressState = 0;
+		byte _pressCount = 0;
 		/**
 		 * the maximum number of milliseconds after the button was
 		 * released that indicates no more pressing has finished.

@@ -4,6 +4,7 @@
 
 
 FixedTimeMultiPressButton::FixedTimeMultiPressButton( byte pin ) : SimpleButton (pin) {
+	// just do SimpleButton constructor
 }
 FixedTimeMultiPressButton::FixedTimeMultiPressButton( byte pin , int pressIntervalTime ) : SimpleButton (pin) {
 	_pressInterval = pressIntervalTime;
@@ -31,7 +32,7 @@ int FixedTimeMultiPressButton::getState() {
 			duration = millis() - _start;
 			if ( duration < _timeLimit ) {
 				// add another press to the record
-				_pressState += 1;
+				_pressCount += 1;
 				_inUse = true;
 			} else {
 				// We have reach the maximum time in which to count
@@ -39,9 +40,9 @@ int FixedTimeMultiPressButton::getState() {
 				// everything.
 
 				// send the number of presses to the caller
-				output = _pressState;
+				output = _pressCount;
 				// reset presses
-				_pressState = 0;
+				_pressCount = 0;
 				// stop counting
 				_counting = false;
 
@@ -62,11 +63,11 @@ int FixedTimeMultiPressButton::getState() {
 			// the moment
 
 			// send the number of presses to the caller
-			output = _pressState;
+			output = _pressCount;
 			// stop counting
 			_counting = false;
 			// reset presses
-			_pressState = 0;
+			_pressCount = 0;
 		} else {
 			// let the caller know we're still counting presses
 			output = -1;

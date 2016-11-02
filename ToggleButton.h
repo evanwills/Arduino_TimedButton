@@ -40,12 +40,12 @@ class ToggleButton : public SimpleButton {
 		 * reset itself
 		 */
 
-		byte _pressState = 0;
+		byte _pressCount = 0;
 		/**
 		 * the maximum number of milliseconds after the button was
 		 * released that indicates no more pressing has finished.
 		 */
-		byte _max = 1;
+		byte _maxPresses = 1;
 };
 
 #endif
