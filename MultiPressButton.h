@@ -31,13 +31,13 @@ class MultiPressButton : public SimpleButton {
 		 */
 		int getState();
 
-	private:
+	protected:
  		/**
 		 * start the time in milliseconds (from when the Arduino was
 		 * turned on) the button was pressed.
 		 */
 		unsigned long _notPressed = 0;
-		bool _inUse = false;
+		bool _MultiPressBtnInUse = false;
 		bool _counting = false;
 		byte _pressState = 0;
 		/**

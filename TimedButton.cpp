@@ -27,7 +27,7 @@ int TimedButton::getState() {
 		}
 		// update how long the button has been pressed for
 		_pressDuration = millis() - _start;
-		_inUse = true;
+		_TimedBtnInUse = true;
 
 		// let the caller know that the button is being pressed
 		// but that we don't know for how long yet.
@@ -36,14 +36,14 @@ int TimedButton::getState() {
 		// button is no longer being pressed.
 		// we keep the press duration for one call so
 		// that buttonPressedFor() can be used effectively
-		if( _inUse == false ) {
+		if( _TimedBtnInUse == false ) {
 			// button was being pressed two calls ago
 			// reset for next press
 			_start = 0;
 			_pressDuration = 0;
 		}
 		// button is no longer being pressed
-		_inUse = false;
+		_TimedBtnInUse = false;
 		return (int) _pressDuration;
 	}
 }

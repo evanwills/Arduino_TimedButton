@@ -26,7 +26,7 @@ class TimedButton : public SimpleButton {
 		TimedButton( byte pin );
 		int getState();
 
-	private:
+	protected:
 
 		/**
 		 * start the time in milliseconds (from when the Arduino was
@@ -34,7 +34,7 @@ class TimedButton : public SimpleButton {
 		 */
 		unsigned long _start = 0;
 		unsigned long _pressDuration = 0;
-		bool _inUse = false;
+		bool _TimedBtnInUse = false;
 };
 
 

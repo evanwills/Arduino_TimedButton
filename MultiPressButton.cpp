@@ -10,7 +10,7 @@ MultiPressButton::MultiPressButton( byte pin , int maxNoPressInterval )  : Simpl
 
 int MultiPressButton::getState() {
 	if( isPressed() == true ) {
-		if ( _inUse == false ) {
+		if ( _MultiPressBtnInUse == false ) {
 			// the button has just been pressed
 			if ( _counting == false ) {
 				// the button has just been pressed for the first
@@ -25,7 +25,7 @@ int MultiPressButton::getState() {
 
 			// add another press to the record
 			_pressState += 1;
-			_inUse = true;
+			_MultiPressBtnInUse = true;
 		}
 
 		// let the caller know that the button is being pressed
@@ -37,7 +37,7 @@ int MultiPressButton::getState() {
 		if ( _counting == true ) {
 			// we know we're counting now we'll check how long it was
 			// since the button was released
-			if ( _inUse == true ) {
+			if ( _MultiPressBtnInUse == true ) {
 				// this is the first time we've noticed the button
 				// has been released let's record that time
 				_notPressed = millis();
@@ -62,7 +62,7 @@ int MultiPressButton::getState() {
 			}
 		}
 		// button is no longer being pressed
-		_inUse = false;
+		_MultiPressBtnInUse = false;
 		return (int) output;
 	}
 }
