@@ -52,9 +52,9 @@ class SimpleButton {
 
 	protected:
 		/*
-		 * btnPin the Arduino Mega pin number used by the button
+		 * _btnPin the Arduino Mega pin number used by the button
 		 */
-		byte btnPin = 0;
+		byte _btnPin = 0;
 };
 
 #endif
