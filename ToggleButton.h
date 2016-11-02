@@ -33,19 +33,19 @@ class ToggleButton : public SimpleButton {
 		 * start the time in milliseconds (from when the Arduino was
 		 * turned on) the button was pressed.
 		 */
-		bool inUse = false;
+		bool _inUse = false;
 
 		/**
 		 * How many times the button has been pressed since it last
 		 * reset itself
 		 */
 
-		byte pressState = 0;
+		byte _pressState = 0;
 		/**
 		 * the maximum number of milliseconds after the button was
 		 * released that indicates no more pressing has finished.
 		 */
-		byte max = 1;
+		byte _max = 1;
 };
 
 #endif

@@ -6,12 +6,12 @@
 // START: (basic) DumbButton class
 
 SimpleButton::SimpleButton(byte pin) {
-	btnPin = pin;
-	pinMode(btnPin, INPUT);
+	_btnPin = pin;
+	pinMode(_btnPin, INPUT);
 }
 
 bool SimpleButton::isPressed() {
-	if (digitalRead(btnPin) == HIGH) {
+	if (digitalRead(_btnPin) == HIGH) {
 		return false;
 	} else {
 		return true;
@@ -33,5 +33,5 @@ int SimpleButton::getState() {
  * useful elsewhere
  */
 void SimpleButton::makePinModePullup() {
-	pinMode(btnPin, INPUT_PULLUP);
+	pinMode(_btnPin, INPUT_PULLUP);
 }

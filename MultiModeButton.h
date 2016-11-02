@@ -23,7 +23,7 @@ class MultiModeButton : public TimedButton {
 
 	public:
 		MultiModeButton( byte pin );
-		MultiModeButton( byte pin , int maxNoPressInterval );
+		MultiModeButton( byte pin , int _maxNoPressInterval );
 		/**
 		 * reads the button's state then returns how long the button
 		 * was pressed for (or -1 if the button is currently being
@@ -37,7 +37,7 @@ class MultiModeButton : public TimedButton {
 		 * currently being pressed.
 		 *
 		 * functionality copied directly from MultiPressButton::pressed()
-		 * The only difference is the variable inUse is renamed to
+		 * The only difference is the variable _inUse is renamed to
 		 * multiPressInUse
 		 */
 		int multiPress();
@@ -50,15 +50,15 @@ class MultiModeButton : public TimedButton {
 		 * start the time in milliseconds (from when the Arduino was
 		 * turned on) the button was pressed.
 		 */
-		unsigned long notPressed = 0;
-		bool multiPressInUse = false;
-		bool counting = false;
-		byte pressState = 0;
+		unsigned long _notPressed = 0;
+		bool _multiPressInUse = false;
+		bool _counting = false;
+		byte _pressState = 0;
 		/**
 		 * the maximum number of milliseconds after the button was
 		 * released that indicates no more pressing has finished.
 		 */
-		int maxNoPress = 500;
+		int _maxNoPress = 500;
 };
 
 #endif

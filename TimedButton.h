@@ -32,9 +32,9 @@ class TimedButton : public SimpleButton {
 		 * start the time in milliseconds (from when the Arduino was
 		 * turned on) the button was pressed.
 		 */
-		unsigned long start = 0;
-		unsigned long pressDuration = 0;
-		bool inUse = false;
+		unsigned long _start = 0;
+		unsigned long _pressDuration = 0;
+		bool _inUse = false;
 };
 
 

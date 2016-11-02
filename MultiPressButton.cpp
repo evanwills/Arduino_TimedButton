@@ -5,18 +5,18 @@ MultiPressButton::MultiPressButton( byte pin ) : SimpleButton (pin) {
 	// don't do anything here
 }
 MultiPressButton::MultiPressButton( byte pin , int maxNoPressInterval )  : SimpleButton (pin) {
-	maxNoPress = maxNoPressInterval;
+	_maxNoPress = maxNoPressInterval;
 }
 
 int MultiPressButton::getState() {
 	if( isPressed() == true ) {
-		if ( inUse == false ) {
+		if ( _inUse == false ) {
 			// the button has just been pressed
-			if ( counting == false ) {
+			if ( _counting == false ) {
 				// the button has just been pressed for the first
 				// time since it was reset. Lets remember that we're
 				// now tracking how many presses
-				counting = true;
+				_counting = true;
 			}
 
 			// because this may be called many times during a single
@@ -24,8 +24,8 @@ int MultiPressButton::getState() {
 			// this is done within this IF statement
 
 			// add another press to the record
-			pressState += 1;
-			inUse = true;
+			_pressState += 1;
+			_inUse = true;
 		}
 
 		// let the caller know that the button is being pressed
@@ -34,35 +34,35 @@ int MultiPressButton::getState() {
 		return -1;
 	} else {
 		int output = 0;
-		if ( counting == true ) {
+		if ( _counting == true ) {
 			// we know we're counting now we'll check how long it was
 			// since the button was released
-			if ( inUse == true ) {
+			if ( _inUse == true ) {
 				// this is the first time we've noticed the button
 				// has been released let's record that time
-				notPressed = millis();
+				_notPressed = millis();
 			}
 
 			// set how many milliseconds ago was the button released
-			int duration = millis() - notPressed;
-			if( duration > maxNoPress ) {
+			int duration = millis() - _notPressed;
+			if( duration > _maxNoPress ) {
 				// the user has stopped pressing the button for
 				// the moment
 
 				// send the number of presses to the caller
-				output = pressState;
+				output = _pressState;
 				// stop counting
-				counting = false;
+				_counting = false;
 				// reset presses
-				pressState = 0;
-				notPressed = 0;
+				_pressState = 0;
+				_notPressed = 0;
 			} else {
 				// let the caller know we're still counting presses
 				output = -1;
 			}
 		}
 		// button is no longer being pressed
-		inUse = false;
+		_inUse = false;
 		return (int) output;
 	}
 }

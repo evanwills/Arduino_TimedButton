@@ -4,8 +4,8 @@
 
 
 TimedButton::TimedButton (byte pin) : SimpleButton (pin) {
-	//btnPin = pin;
-	//pinMode(btnPin, INPUT);
+	//_btnPin = pin;
+	//pinMode(_btnPin, INPUT);
 }
 
 /**
@@ -22,12 +22,12 @@ TimedButton::TimedButton (byte pin) : SimpleButton (pin) {
  */
 int TimedButton::getState() {
 	if( isPressed() == true ) {
-		if (start == 0 ) {
-			start = millis();
+		if (_start == 0 ) {
+			_start = millis();
 		}
 		// update how long the button has been pressed for
-		pressDuration = millis() - start;
-		inUse = true;
+		_pressDuration = millis() - _start;
+		_inUse = true;
 
 		// let the caller know that the button is being pressed
 		// but that we don't know for how long yet.
@@ -36,14 +36,14 @@ int TimedButton::getState() {
 		// button is no longer being pressed.
 		// we keep the press duration for one call so
 		// that buttonPressedFor() can be used effectively
-		if( inUse == false ) {
+		if( _inUse == false ) {
 			// button was being pressed two calls ago
 			// reset for next press
-			start = 0;
-			pressDuration = 0;
+			_start = 0;
+			_pressDuration = 0;
 		}
 		// button is no longer being pressed
-		inUse = false;
-		return (int) pressDuration;
+		_inUse = false;
+		return (int) _pressDuration;
 	}
 }
