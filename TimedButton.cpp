@@ -4,8 +4,7 @@
 
 
 TimedButton::TimedButton (byte pin) : SimpleButton (pin) {
-	//_btnPin = pin;
-	//pinMode(_btnPin, INPUT);
+	// just do SimpleButton constructor
 }
 
 /**
