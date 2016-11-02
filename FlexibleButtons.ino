@@ -39,16 +39,16 @@ void loop() {
 //	}
 
 //	// Turns the board's LED on when button is pressed
-// --------------------------------------------------
+//	// --------------------------------------------------
 //	// for more than 1 second
 //	if ( timedButton.getState() > 1000 ) {
-// --------------------------------------------------
+//	// --------------------------------------------------
 //	// at least twice in quick succession
 //	if ( multiPressButton.getState() >= 2 ) {
-// --------------------------------------------------
+//	// --------------------------------------------------
 //	// at least three times within half a second
 //	if ( fixedTimeMultiPressButton.getState() >= 3 ) {
-// --------------------------------------------------
+//	// --------------------------------------------------
 //		digitalWrite(13, HIGH);
 //		delay(2000);
 //	} else {

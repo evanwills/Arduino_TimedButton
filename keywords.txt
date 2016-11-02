@@ -7,6 +7,6 @@ FixedTimeMultiPressButton KEYWORD1
 MultiModeButton KEYWORD1
 
 isPressed KEYWORD2
-getStateE KEYWORD2
+getState KEYWORD2
 multiPress KEYWORD2
 makePinModePullup KEYWORD2
