@@ -24,3 +24,46 @@ Returns an signed integer.
 Simply changes the mode of the button from INPUT to INPUT_PULLUP. (Useful if you don't want to have resisters on every button.)
 
 __NOTE:__ `makePinModePullup()` should only be called once, during setup.
+
+
+## Using Multiple Modes on a single physical button
+
+There are times where you might have a single physical button but in different contexts you want it to behave in different ways.
+
+e.g. You have one button:
+*	in normal mode, it needs to register when there is a 1 second long press which moves program into config mode.
+*	In config mode, the button needs to toggle between 5 different states.
+*	a fast double click ends the config and stores all the changes.
+
+In this scenario you would create three separate button objects
+
+``` C++
+TimedButton configMode( 23 );
+ToggleButton configInput( 23 , 5 );
+MultiPressButton configEnd( 23 );
+bool action = true;
+
+void loop() {
+	if( configMode.getState() > 1000 || action == false ) {
+		action = false;
+
+		int inputMode = configInput.getState();
+		if( inputMode == 0 ) {
+			getValueForInput_0();
+		} else if( inputMode == 1 ) {
+			getValueForInput_1();
+		} else if( inputMode == 2 ) {
+			getValueForInput_2();
+		} else if( inputMode == 3 ) {
+			getValueForInput_3();
+		} else if( inputMode == 4 ) {
+			getValueForInput_4();
+		}
+
+		if( configEnd.getState() == 2 ) {
+			applyChanges();
+			action = true;
+		}
+	}
+}
+```
