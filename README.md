@@ -7,7 +7,7 @@ The classes are:
 *	`ToggleButton` makes a button work like a switch. This can be useful for toggling between items in an array. Or just switching something on or off (__*CURRENTLY NOT WORKING*__)
 *	`TimedButton` makes the duration of a button press knowable useful if you want to do different things with a button depending on how long it was pressed
 *	`MultiPressButton` tells you how many times a button has been pressed where the interval between presses does not excede a maximum number of milliseconds (Default is 500 milliseconds)
-*	`FixedTimeMultiPressButton` how many times a button has been pressed within a given time (useful for doing the equivalent of double or tripple click on a computer) (__*CURRENTLY NOT WORKING*__)
+*	`FixedTimeMultiPressButton` how many times a button has been pressed within a given time (useful for doing the equivalent of double or tripple click on a computer)
 
 ## Methods:
 

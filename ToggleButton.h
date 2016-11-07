@@ -20,7 +20,8 @@ class ToggleButton : public SimpleButton {
 
 	public:
 		ToggleButton( byte pin);
-		ToggleButton( byte pin , byte limit);
+		ToggleButton( byte pin , byte limit );
+
 		/**
 		 * reads the button's state then returns the number of
 		 * times the buttons was pressed.

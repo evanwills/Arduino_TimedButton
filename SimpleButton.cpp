@@ -7,7 +7,11 @@
 
 SimpleButton::SimpleButton(byte pin) {
 	_btnPin = pin;
-	pinMode(_btnPin, INPUT);
+	if( SimpleButton::_alwaysPullup == true ) {
+		pinMode(_btnPin, INPUT_PULLUP);
+	} else {
+		pinMode(_btnPin, INPUT);
+	}
 }
 
 bool SimpleButton::isPressed() {
@@ -35,3 +39,9 @@ int SimpleButton::getState() {
 void SimpleButton::makePinModePullup() {
 	pinMode(_btnPin, INPUT_PULLUP);
 }
+
+void SimpleButton::makePinModeAlwaysPullup() {
+	SimpleButton::_alwaysPullup = true;
+}
+
+bool SimpleButton::_alwaysPullup = false;

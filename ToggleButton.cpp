@@ -25,9 +25,10 @@ int ToggleButton::getState() {
 
 			// add another press to the record
 			_pressCount += 1;
+			Serial.print(_pressCount);
 
-			// check how many times the button has been pressed since
-			// last reset and reset if necessary
+			// check how many times the button has been pressed. If
+			// it has exceded the maximum set it back to zero
 			if ( _pressCount > _maxPresses ) {
 				_pressCount = 0;
 			}
@@ -37,7 +38,8 @@ int ToggleButton::getState() {
 		_inUse = false;
 	}
 
-	// make the value returned match what the interface expects
+	// make the value returned match what the prototype expects
+//	return  _pressCount;
 	return (int) _pressCount;
 }
 

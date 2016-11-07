@@ -23,11 +23,28 @@
 #include <Arduino.h>
 #include <stdlib.h>
 
+class FlexibleButtonInterface {
+	public:
+		/**
+		 * If button is pressed, starts counting the number of
+		 * milliseconds since start and returns true. If not,
+		 * resets the timer and returns false.
+		 */
+		virtual bool isPressed();
 
-class SimpleButton {
+		/**
+		 * reads the button's state then returns zero if the button
+		 * is not pressed and one if it is.
+		 */
+		virtual int getState();
+};
+
+
+class SimpleButton : public FlexibleButtonInterface {
 
 	public:
 		SimpleButton( byte pin );
+
 		/**
 		 * If button is pressed, starts counting the number of
 		 * milliseconds since start and returns true. If not,
@@ -50,11 +67,15 @@ class SimpleButton {
 		 */
 		void makePinModePullup();
 
+		static void makePinModeAlwaysPullup();
+
 	protected:
 		/*
 		 * _btnPin the Arduino Mega pin number used by the button
 		 */
 		byte _btnPin = 0;
+
+		static bool _alwaysPullup;
 };
 
 #endif
