@@ -5,11 +5,7 @@
 #include <Wire.h>
 
 
-//#include "SimpleButton.h"
-#include "ToggleButton.h"
-//#include "TimedButton.h"
-//#include "MultiPressButton.h"
-//#include "FixedTimeMultiPressButton.h"
+#include "FlexibleButtons.h"
 
 Adafruit_SSD1306 OLEDScreen(4); //OLED_RESET
 
@@ -39,8 +35,6 @@ void setup() {
 //	multiPressButton.makePinModePullup();
 //	fixedTimeMultiPressButton.makePinModePullup();
 	pinMode(13, OUTPUT);
-//	Serial.begin(9600);
-//	Serial.begin(115200);
 
 	// Initialise the OLED display
 	// Note: it is necessary to change a value in the Adafruit_SSD1306 library to set the screen size to 128x64
