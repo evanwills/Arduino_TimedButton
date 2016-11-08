@@ -23,7 +23,10 @@ Returns an signed integer.
 ### `void makePinModePullup()`
 Simply changes the mode of the button from INPUT to INPUT_PULLUP. (Useful if you don't want to have resisters on every button.)
 
-__NOTE:__ `makePinModePullup()` should only be called once, during setup.
+__NOTE:__ `makePinModePullup()` should only be called once, during setup. _(Has no additional affect if called multiple times on a single button object.)_
+
+### `static void makePinModeAlwaysPullup()`
+Makes all buttons `INPUT_PULLUP` at instantiation. This only affects buttons that are instantiated after `SimpleButton::makePinModeAlwaysPullup()` is called. _(Has no additional affect if called multiple times)_
 
 
 ## Using Multiple Modes on a single physical button
@@ -38,6 +41,8 @@ e.g. You have one button:
 In this scenario you would create three separate button objects
 
 ``` C++
+SimpleButton::makePinModeAlwaysPullup();
+
 TimedButton configMode( 23 );
 ToggleButton configInput( 23 , 5 );
 MultiPressButton configEnd( 23 );
