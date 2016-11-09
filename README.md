@@ -26,7 +26,7 @@ Simply changes the mode of the button from INPUT to INPUT_PULLUP. (Useful if you
 __NOTE:__ `makePinModePullup()` should only be called once, during setup. _(Has no additional affect if called multiple times on a single button object.)_
 
 ### `static void makePinModeAlwaysPullup()`
-Makes all buttons `INPUT_PULLUP` at instantiation. This only affects buttons that are instantiated after `SimpleButton::makePinModeAlwaysPullup()` is called. _(Has no additional affect if called multiple times)_
+Makes all new buttons `INPUT_PULLUP` at instantiation. This only affects buttons that are instantiated after `SimpleButton::makePinModeAlwaysPullup()` is called. _(Has no additional affect if called multiple times. Buttons instantiated before this is called will not change)_
 
 
 ## Using Multiple Modes on a single physical button
