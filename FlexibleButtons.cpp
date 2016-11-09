@@ -85,7 +85,7 @@ int ToggleButton::getState() {
 
 			// check how many times the button has been pressed. If
 			// it has exceded the maximum set it back to zero
-			if ( _pressCount > _maxPresses ) {
+			if ( _pressCount >= _maxPresses ) {
 				_pressCount = 0;
 			}
 			_inUse = true;

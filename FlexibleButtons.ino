@@ -20,21 +20,16 @@ Adafruit_SSD1306 OLEDScreen(4); //OLED_RESET
 //	5 - 27
 //	6 - 25
 //	7 - 23
-//SimpleButton simpleButton(23);
-ToggleButton toggleButton(23, 5);
-//TimedButton timedButton(23);
-//MultiPressButton multiPressButton(23);
+//SimpleButton btn(23);
+//ToggleButton btn(23, 5);
+TimedButton btn(23);
+//MultiPressButton btn(23);
 //FixedTimeMultiPressButton fixedTimeMultiPressButton(23);
 
 
 void setup() {
 	// put your setup code here, to run once:
-//	simpleButton.makePinModePullup();
-	toggleButton.makePinModePullup();
-//	timedButton.makePinModePullup();
-//	multiPressButton.makePinModePullup();
-//	fixedTimeMultiPressButton.makePinModePullup();
-	pinMode(13, OUTPUT);
+	btn.makePinModePullup();
 
 	// Initialise the OLED display
 	// Note: it is necessary to change a value in the Adafruit_SSD1306 library to set the screen size to 128x64
@@ -43,14 +38,6 @@ void setup() {
 
 	// Set some default values for writing to the OLED screen
 	OLEDScreen.setTextColor(WHITE);
-
-	OLEDScreen.setTextSize(3);
-	OLEDScreen.setCursor(0, 0);
-	OLEDScreen.print("Testing button:"); //this copies some text to the screens memory
-	OLEDScreen.setTextSize(2);
-	OLEDScreen.setCursor(0, 32);
-	OLEDScreen.print("ToggleButton:"); //this copies some text to the screens memory
-	delay(2000);
 }
 
 void loop() {
@@ -59,17 +46,20 @@ void loop() {
 	// Write "Hello" in small
 	OLEDScreen.setTextSize(1);
 	OLEDScreen.setCursor(0, 0);
-	OLEDScreen.print("testing buttons"); //this copies some text to the screens memory
+	OLEDScreen.print("Testing: ");
+	OLEDScreen.setCursor(16, 12);
+		OLEDScreen.print("FlexibleButtons"); //this copies some text to the screens memory
 
-	// turns the LED on if pressed
-//	if ( simpleButton.getState() == 1 ) {
-//		digitalWrite(13, HIGH);
-//	} else {
-//		digitalWrite(13, LOW);
-//	}
+	int state = btn.getState();
+
+
+	OLEDScreen.setCursor(28, 40);
+	OLEDScreen.print("state: "); //this copies some text to the screens memory
+	OLEDScreen.print(state); //this copies some text to the screens memory
+
 
 //	// Turns the LED on if pressed for more than 1 second
-//	if ( toggleButton.getState() > 1 ) {
+//	if ( btn.getState() > 1 ) {
 //		digitalWrite(13, HIGH);
 //	} else {
 //		digitalWrite(13, LOW);
@@ -78,13 +68,13 @@ void loop() {
 //	// Turns the board's LED on when button is pressed
 //	// --------------------------------------------------
 //	// for more than 1 second
-//	if ( timedButton.getState() > 1000 ) {
+//	if ( btn.getState() > 1000 ) {
 //	// --------------------------------------------------
 //	// at least twice in quick succession
-//	if ( multiPressButton.getState() >= 2 ) {
+//	if ( btn.getState() >= 2 ) {
 //	// --------------------------------------------------
 //	// at least three times within half a second
-//	if ( fixedTimeMultiPressButton.getState() >= 3 ) {
+//	if ( btn.getState() >= 3 ) {
 //	// --------------------------------------------------
 //		digitalWrite(13, HIGH);
 //		delay(2000);
@@ -96,33 +86,25 @@ void loop() {
 //	// ==============================================================
 //	// Testing how many times the multi press buttons were pressed
 
-//	int state = simpleButton.getState();
-	int state = toggleButton.getState();
-//	int state = multiPressButton.getState();
-//	int state = fixedTimeMultiPressButton.getState();
-
-	OLEDScreen.setCursor(0, 24);
-	OLEDScreen.print("state = "); //this copies some text to the screens memory
-	OLEDScreen.print(state); //this copies some text to the screens memory
 
 	//Serial.begin(9600);
 	//Serial.begin(115200);
 	//Serial.print(state);
-	while ( state > 0 ) {
-		OLEDScreen.setCursor(0, 32);
-		OLEDScreen.print("inside loop"); //this copies some text to the screens memory
-		digitalWrite(13, HIGH);delay(500);
-		digitalWrite(13, LOW);delay(500);
-		state -= 1;
-
-		OLEDScreen.setCursor(0, 48);
-		OLEDScreen.print("state = ");
-		OLEDScreen.print(state);
-	}
-
-	OLEDScreen.setCursor(0, 56);
-	OLEDScreen.print("finished loop"); //this copies some text to the screens memory
-	delay(2000);
+//	while ( state > 0 ) {
+//		OLEDScreen.setCursor(0, 32);
+//		OLEDScreen.print("inside loop"); //this copies some text to the screens memory
+//		digitalWrite(13, HIGH);delay(500);
+//		digitalWrite(13, LOW);delay(500);
+//		state -= 1;
+//
+//		OLEDScreen.setCursor(0, 48);
+//		OLEDScreen.print("state = ");
+//		OLEDScreen.print(state);
+//	}
+//
+//	OLEDScreen.setCursor(0, 56);
+//	OLEDScreen.print("finished loop"); //this copies some text to the screens memory
+//	delay(2000);
 //
 //
 //	digitalWrite(13, HIGH); delay(50); digitalWrite(13, LOW); delay(50);
