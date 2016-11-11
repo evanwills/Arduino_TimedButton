@@ -23,11 +23,13 @@ Returns an signed integer.
 ## Sub classes:
 
 ### `SimpleButton(pin, pullup)`
-Does nothing interesting except providing a simple interface for using buttons which all the following classes inherit.
+
+Does nothing interesting except implementing the StatefulButton interface from which all the other classes inheritfor.
 
 `byte pin` The number of the pin the button is plugged into.
 
 `bool pullup = false` If the button doesn't have a resistor somewhere in the circuit, pullup needs to be true to make the input mode `INPUT_PULLUP`
+
 
 ### `ToggleButton(byte pin, bool pullup = false, byte limit = 1)`
 Makes a button work like a switch. This can be useful for toggling between items in an array. Or just switching something on or off
@@ -35,6 +37,7 @@ Makes a button work like a switch. This can be useful for toggling between items
 (see `SimpleButton` above for info on __`pin`__ and __`pullup`__ parameters)
 
 `byte limit = 1` by default the ToggleButton toggles between `1` and `0` by setting a limit, you can make the button toggle between `0` and up to `254`
+
 
 ### `TimedButton(pin, pullup)`
 
