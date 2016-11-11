@@ -4,9 +4,6 @@ ToggleButton KEYWORD1
 TimedButton KEYWORD1
 MultiPressButton KEYWORD1
 FixedTimeMultiPressButton KEYWORD1
-MultiModeButton KEYWORD1
 
 isPressed KEYWORD2
 getState KEYWORD2
-multiPress KEYWORD2
-makePinModePullup KEYWORD2
