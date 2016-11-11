@@ -61,7 +61,7 @@ class FlexibleButtonInterface {
 class SimpleButton : public FlexibleButtonInterface {
 
 	public:
-		SimpleButton( byte pin );
+		SimpleButton(byte pin, bool pullup = false);
 
 		/**
 		 * If button is pressed, starts counting the number of
@@ -109,8 +109,7 @@ class SimpleButton : public FlexibleButtonInterface {
 class ToggleButton : public SimpleButton {
 
 	public:
-		ToggleButton( byte pin);
-		ToggleButton( byte pin , byte limit );
+		ToggleButton(byte pin, bool pullup = false, byte limit = 1);
 
 		/**
 		 * reads the button's state then returns the number of
@@ -152,7 +151,7 @@ class ToggleButton : public SimpleButton {
 class TimedButton : public SimpleButton {
 
 	public:
-		TimedButton( byte pin );
+		TimedButton(byte pin, bool pullup = false);
 		int getState();
 
 	private:
@@ -180,8 +179,7 @@ class TimedButton : public SimpleButton {
 class MultiPressButton : public SimpleButton {
 
 	public:
-		MultiPressButton( byte pin );
-		MultiPressButton( byte pin , int maxNoPressInterval );
+		MultiPressButton( byte pin, bool pullup = false, int maxNoPressInterval = 250 );
 		/**
 		 * reads the button's state then returns the number of
 		 * times the buttons was pressed.
@@ -201,7 +199,7 @@ class MultiPressButton : public SimpleButton {
 		 * the maximum number of milliseconds after the button was
 		 * released that indicates no more pressing has finished.
 		 */
-		int _maxNoPress = 500;
+		int _maxNoPress = 250;
 };
 
 
@@ -217,8 +215,7 @@ class MultiPressButton : public SimpleButton {
 class FixedTimeMultiPressButton : public SimpleButton {
 
 	public:
-		FixedTimeMultiPressButton( byte pin );
-		FixedTimeMultiPressButton( byte pin , int pressIntervalTime );
+		FixedTimeMultiPressButton( byte pin, bool pullup = false, int pressIntervalTime = 1000 );
 		/**
 		 * reads the button's state then returns the number of
 		 * times the buttons was pressed.
@@ -237,10 +234,10 @@ class FixedTimeMultiPressButton : public SimpleButton {
 		bool _counting = false;
 		byte _pressCount = 0;
 		/**
-		 * the maximum number of milliseconds after the button was
-		 * released that indicates no more pressing has finished.
+		 * The time from when the button was first pressed to when it
+		 * stops counting presses
 		 */
-		int _timeLimit = 1000;
+		int _timeLimit = 500;
 };
 
 

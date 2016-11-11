@@ -5,12 +5,13 @@
 // START: SimpleButton class
 
 
-SimpleButton::SimpleButton(byte pin) {
+SimpleButton::SimpleButton(byte pin, bool pullup = false) {
 	_btnPin = pin;
-	if( SimpleButton::_alwaysPullup == true ) {
-		pinMode(_btnPin, INPUT_PULLUP);
-	} else {
+
+	if( pullup == false ) {
 		pinMode(_btnPin, INPUT);
+	} else {
+		pinMode(_btnPin, INPUT_PULLUP);
 	}
 }
 
@@ -58,10 +59,8 @@ bool SimpleButton::_alwaysPullup = false;
 // START: ToggleButton class
 
 
-ToggleButton::ToggleButton( byte pin ) : SimpleButton (pin) {
+ToggleButton::ToggleButton(byte pin, bool pullup = false, byte limit = 1) : SimpleButton (pin, pullup) {
 	// just do SimpleButton constructor
-}
-ToggleButton::ToggleButton( byte pin , byte limit ) : SimpleButton (pin) {
 	_maxPresses = limit;
 }
 
@@ -111,7 +110,7 @@ int ToggleButton::getState() {
 // START: TimedButton class
 
 
-TimedButton::TimedButton (byte pin) : SimpleButton (pin) {
+TimedButton::TimedButton (byte pin, bool pullup = false) : SimpleButton (pin, pullup) {
 	// just do SimpleButton constructor
 }
 
@@ -167,10 +166,7 @@ int TimedButton::getState() {
 // START: MultiPressButton class
 
 
-MultiPressButton::MultiPressButton( byte pin ) : SimpleButton (pin) {
-	// just do SimpleButton constructor
-}
-MultiPressButton::MultiPressButton( byte pin , int maxNoPressInterval )  : SimpleButton (pin) {
+MultiPressButton::MultiPressButton( byte pin, bool pullup = false , int maxNoPressInterval = 250 )  : SimpleButton (pin, pullup) {
 	_maxNoPress = maxNoPressInterval;
 }
 
@@ -245,10 +241,7 @@ int MultiPressButton::getState() {
 // START: FixedTimeMultiPressButton class
 
 
-FixedTimeMultiPressButton::FixedTimeMultiPressButton( byte pin ) : SimpleButton (pin) {
-	// just do SimpleButton constructor
-}
-FixedTimeMultiPressButton::FixedTimeMultiPressButton( byte pin , int pressIntervalTime ) : SimpleButton (pin) {
+FixedTimeMultiPressButton::FixedTimeMultiPressButton( byte pin, bool pullup = false, int pressIntervalTime = 500 ) : SimpleButton (pin, pullup) {
 	_pressInterval = pressIntervalTime;
 }
 

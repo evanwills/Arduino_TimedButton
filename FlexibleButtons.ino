@@ -20,16 +20,15 @@ Adafruit_SSD1306 OLEDScreen(4); //OLED_RESET
 //	5 - 27
 //	6 - 25
 //	7 - 23
-//SimpleButton btn(23);
-//ToggleButton btn(23, 5);
-TimedButton btn(23);
-//MultiPressButton btn(23);
-//FixedTimeMultiPressButton fixedTimeMultiPressButton(23);
+//SimpleButton btn(23, true);
+//ToggleButton btn(23, true, 5);
+//TimedButton btn(23, true);
+//MultiPressButton btn(23, true);
+FixedTimeMultiPressButton btn(23, true);
 
 
 void setup() {
 	// put your setup code here, to run once:
-	btn.makePinModePullup();
 
 	// Initialise the OLED display
 	// Note: it is necessary to change a value in the Adafruit_SSD1306 library to set the screen size to 128x64
@@ -48,7 +47,7 @@ void loop() {
 	OLEDScreen.setCursor(0, 0);
 	OLEDScreen.print("Testing: ");
 	OLEDScreen.setCursor(16, 12);
-		OLEDScreen.print("FlexibleButtons"); //this copies some text to the screens memory
+	OLEDScreen.print("FlexibleButtons"); //this copies some text to the screens memory
 
 	int state = btn.getState();
 

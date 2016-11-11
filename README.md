@@ -3,11 +3,11 @@
 `FlexibleButtons` is a collection of classes/objects to make doing stuff with buttons easier
 
 The classes are:
-*	`SimpleButton` does nothing interesting except providing a simple interface for using buttons which all the following classes inherit.
-*	`ToggleButton` makes a button work like a switch. This can be useful for toggling between items in an array. Or just switching something on or off (__*CURRENTLY NOT WORKING*__)
-*	`TimedButton` makes the duration of a button press knowable useful if you want to do different things with a button depending on how long it was pressed
-*	`MultiPressButton` tells you how many times a button has been pressed where the interval between presses does not excede a maximum number of milliseconds (Default is 500 milliseconds)
-*	`FixedTimeMultiPressButton` how many times a button has been pressed within a given time (useful for doing the equivalent of double or tripple click on a computer)
+*	`SimpleButton`
+*	`ToggleButton`
+*	`TimedButton`
+*	`MultiPressButton`
+*	`FixedTimeMultiPressButton`
 
 ## Methods:
 
@@ -20,14 +20,50 @@ Returns an signed integer.
 *	If the button is being pressed and it doesn't know the final output yet it ruturns `-1`;
 *	If it knows the output it will return either the number of presses or the number of milliseconds the button was pressed for, depending on the class.
 
-### `void makePinModePullup()`
-Simply changes the mode of the button from INPUT to INPUT_PULLUP. (Useful if you don't want to have resisters on every button.)
+## Sub classes:
 
-__NOTE:__ `makePinModePullup()` should only be called once, during setup. _(Has no additional affect if called multiple times on a single button object.)_
+### `SimpleButton(byte pin, bool pullup = false)`
+Does nothing interesting except providing a simple interface for using buttons which all the following classes inherit.
 
-### `static void makePinModeAlwaysPullup()`
-Makes all new buttons `INPUT_PULLUP` at instantiation. This only affects buttons that are instantiated after `SimpleButton::makePinModeAlwaysPullup()` is called. _(Has no additional affect if called multiple times. Buttons instantiated before this is called will not change)_
+`byte pin` The number of the pin the button is plugged into.
 
+`bool pullup = false` If the button doesn't have a resistor somewhere in the circuit, pullup needs to be true to make the input mode `INPUT_PULLUP`
+
+### `ToggleButton(byte pin, bool pullup = false, byte limit = 1)`
+Makes a button work like a switch. This can be useful for toggling between items in an array. Or just switching something on or off
+
+(see `SimpleButton` above for info on __`pin`__ and __`pullup`__ parameters)
+
+`byte limit = 1` by default the ToggleButton toggles between `1` and `0` by setting a limit, you can make the button toggle between `0` and up to `254`
+
+### `TimedButton(byte pin, bool pullup = false)`
+
+Makes the duration of a button press knowable. useful if you want to do different things with a button depending on how long it was pressed
+
+(see `SimpleButton` above for info on __`pin`__ and __`pullup`__ parameters)
+
+
+### `MultiPressButton(byte pin, bool pullup = false, int maxNoPressInterval = 250)`
+
+Tells you how many times a button has been pressed where the interval between presses does not excede a maximum number of milliseconds (Default is 250 milliseconds)
+
+(see `SimpleButton` above for info on __`pin`__ and __`pullup`__ parameters)
+
+`int maxNoPressInterval = 250` the maximum number of milliseconds after the button was released that indicates no more pressing has finished.
+
+__NOTE:__ The higher the `maxNoPressInterval` value the more lag between when you finish pressing the button and when the button can give it's state - in this case the number of presses.
+
+
+### `FixedTimeMultiPressButton(pin, pullup, pressIntervalTime)`
+
+How many times a button has been pressed within a given time (useful for doing the equivalent of double or tripple click on a computer)
+
+(see `SimpleButton` above for info on __`pin`__ and __`pullup`__ parameters)
+
+`int pressIntervalTime = 500` The time from when the button was first pressed to when it stops counting presses
+
+
+---------------
 
 ## Using Multiple Modes on a single physical button
 
