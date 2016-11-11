@@ -22,7 +22,7 @@ Returns an signed integer.
 
 ## Sub classes:
 
-### `SimpleButton(byte pin, bool pullup = false)`
+### `SimpleButton(pin, pullup)`
 Does nothing interesting except providing a simple interface for using buttons which all the following classes inherit.
 
 `byte pin` The number of the pin the button is plugged into.
@@ -36,14 +36,14 @@ Makes a button work like a switch. This can be useful for toggling between items
 
 `byte limit = 1` by default the ToggleButton toggles between `1` and `0` by setting a limit, you can make the button toggle between `0` and up to `254`
 
-### `TimedButton(byte pin, bool pullup = false)`
+### `TimedButton(pin, pullup)`
 
 Makes the duration of a button press knowable. useful if you want to do different things with a button depending on how long it was pressed
 
 (see `SimpleButton` above for info on __`pin`__ and __`pullup`__ parameters)
 
 
-### `MultiPressButton(byte pin, bool pullup = false, int maxNoPressInterval = 250)`
+### `MultiPressButton(pin, pullup, maxNoPressInterval)`
 
 Tells you how many times a button has been pressed where the interval between presses does not excede a maximum number of milliseconds (Default is 250 milliseconds)
 
@@ -80,7 +80,7 @@ In this scenario you would create three separate button objects
 SimpleButton::makePinModeAlwaysPullup();
 
 TimedButton configMode( 23 );
-ToggleButton configInput( 23 , 5 );
+ToggleButton configInput( 23 , false , 5 );
 MultiPressButton configEnd( 23 );
 bool action = true;
 

@@ -215,7 +215,7 @@ class MultiPressButton : public SimpleButton {
 class FixedTimeMultiPressButton : public SimpleButton {
 
 	public:
-		FixedTimeMultiPressButton( byte pin, bool pullup = false, int pressIntervalTime = 1000 );
+		FixedTimeMultiPressButton( byte pin, bool pullup = false, int pressIntervalTime = 500 );
 		/**
 		 * reads the button's state then returns the number of
 		 * times the buttons was pressed.
