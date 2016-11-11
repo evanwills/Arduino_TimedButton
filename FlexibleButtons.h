@@ -1,9 +1,10 @@
 /**
- * FlexibleButtons.h - base class for a set of objects that allows you to
+ * StatefulButton.h - base class for a set of objects that allows you to
  * do useful time based things with a button.
  *
- * The SimpleButton class does very little but provide a standard
- * interface for other classes to inherit from
+ * The SimpleButton class does very little but provide the base
+ * implementation if the StatefulButtons interface for other classes
+ * to inherit from
  *
  * e.g. a short click of the button (say, less than 1 second) is used
  *		for modifying settings but a long click is used for resetting
@@ -17,8 +18,8 @@
  */
 
 
-#ifndef SimpleButton_h
-#define SimpleButton_h
+#ifndef StatefulButton_h
+#define StatefulButton_h
 
 #include <Arduino.h>
 #include <stdlib.h>
@@ -29,10 +30,10 @@
 
 
 // ==================================================================
-// START: FlexibleButton interface
+// START: StatefulButton interface
 
 
-class FlexibleButtonInterface {
+class StatefulButtonInterface {
 	public:
 		/**
 		 * If button is pressed, starts counting the number of
@@ -58,7 +59,7 @@ class FlexibleButtonInterface {
 // START: SimpleButton class
 
 
-class SimpleButton : public FlexibleButtonInterface {
+class SimpleButton : public StatefulButtonInterface {
 
 	public:
 		SimpleButton(byte pin, bool pullup = false);

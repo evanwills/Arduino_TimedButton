@@ -5,7 +5,7 @@
 #include <Wire.h>
 
 
-#include "FlexibleButtons.h"
+#include "StatefulButton.h"
 
 Adafruit_SSD1306 OLEDScreen(4); //OLED_RESET
 
@@ -47,7 +47,7 @@ void loop() {
 	OLEDScreen.setCursor(0, 0);
 	OLEDScreen.print("Testing: ");
 	OLEDScreen.setCursor(16, 12);
-	OLEDScreen.print("FlexibleButtons"); //this copies some text to the screens memory
+	OLEDScreen.print("StatefulButton"); //this copies some text to the screens memory
 
 	int state = btn.getState();
 

@@ -1,6 +1,6 @@
-# FlexibleButtons
+# StatefulButtons
 
-`FlexibleButtons` is a collection of classes/objects to make doing stuff with buttons easier
+`StatefulButtons` is a collection of classes/objects to make managing state with physical buttons easier
 
 The classes are:
 *	`SimpleButton`
@@ -9,7 +9,7 @@ The classes are:
 *	`MultiPressButton`
 *	`FixedTimeMultiPressButton`
 
-## Methods:
+## Interface Methods:
 
 ### `bool isPressed()`
 Returns `TRUE` if the button is currently being pressed. Or `FALSE` otherwise.
